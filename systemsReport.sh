@@ -1,27 +1,51 @@
 #!/bin/bash
 
+
 # Scirpts to generate system information
+
+# Changes date alias to currentDate
 currentDate=$(date)
 
+
+# Changes hostname alias for standard alias'
 hostName=$(hostname)
+# Echos /etc/os-release char, with readable OS output
 os=$(source /etc/os-release && echo "$PRETTY_NAME")
+# Displays uptime in human readable format
 upTime=$(uptime -p)
 
+
+# Displays processor product name
 cpuName=$(sudo lshw -class processer | grep -m 1 "product:")
+# Displays ram size in readable format
 ramSpecs=$(free -h | awk '/^Meme:/ {print $2}')
-diskSize=$(lshw -class disk | grep -m 1 "product:")
+# Displays disk product name
+diskName=$(lshw -class disk | grep -m 1 "product:")
+# Displays video car product name
 videoCard=$(lshw -class display | grep -m 1 "product:")
 
+
+# Displays sudo hostname in fqdn format
 fqdn=$(sudo hostname -f)
+# Displays Hosts default ip address
 hostIp=$(sudo ip route | grep -i "/default/")
+# Displays systems gateway IP
 gateWay=$(sudo ip route | grep -i "Gateway")
+# Displays dns server current status
 dnsServer=$(resolvectl status | grep -i "Current DNS")
 
+
+# Displays current user names, including host name
 currentUsers=$($hostName + " " + $USER)
+# Disk space in GB
 diskSpace=$(sudo df -h | grep '/dev/sda2')
+# Human readable process count number
 processCount=$(sudo ps -e --no-headers | wc -l)
+# Load time average over the last 3 load times
 loadAvg=$(sudo uptime | awk -F 'load average:' '{print $2}')
+# Displays current listening network ports
 listeningNetworkPorts=$(sudo ss -tuln | grep 'LISTEN')
+# Displays current ufw status
 ufwStatus=$(sudo ufw status)
 
 
@@ -44,16 +68,16 @@ Uptime: $upTime
 
 Hardware Information
 --------------------
-# Displays cpu stats, ram stats, disk(s) storage in MB, graphics display card name #
+# Displays cpu stats, ram stats, disk(s) storage, graphics display card name
 cpu: $cpuName
 Ram: $ramSpecs
-Disk(s):  $diskSize
+Disk(s):  $diskName
 Video: $videoCard
 
 
 Network Information
 -------------------
-# Displays fqdn name, hosts ip, gateway ip, and DNS Server stats #
+# Displays fqdn name, hosts ip, gateway ip, and DNS Server stats 
 FQDN: $fqdn
 Host Address: $hostIp
 Gateway IP: $gateWay
@@ -62,14 +86,14 @@ $dnsServer
 
 System Status
 ----------------
-# Displays current usernames, disk space in MB, current process count, load average, listening network ports, UFW status
+# Displays current usernames, disk space in GB, current process count, load average, listening network ports, UFW status
 Users Logged In: $currentUsers
-Disk Space:  
-Process Count:
-Load Averages:
-Listening Network Ports:
+Disk Space: $diskSpace
+Process Count: $processCount
+Load Averages: $loadAvg
+Listening Network Ports: $listeningNetworkPorts
 UFW $ufwStatus
 
 
-
+# Completes the reading of the file from cat software
 EOF
