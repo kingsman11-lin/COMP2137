@@ -1,0 +1,19 @@
+---Host/Student info----
+
+Running on Wed Mar 12 01:11:13 PM EDT 2025
+Run by tysonmc - () on host
+ Static hostname: student
+      Machine ID: 2e70ccae85e54ce3add7ef679bd1c993
+Operating System: Ubuntu 24.04.2 LTS
+9ac9629390cbcae160fd061a74ce1178  ./check-assign2-script.sh - d41d8cd98f00b204e9800998ecf8427e  -
+------------------------
+
+---Start of Assignment2.sh Check------
+---Running makecontainers.sh----------
+# Host server1-mgmt found: line 6
+/home/tysonmc/.ssh/known_hosts updated.
+Original contents retained as /home/tysonmc/.ssh/known_hosts.old
+---Retrieving assignment2.sh script---
+Retrieved assignment2 script
+Copied assignment2.sh script to server1
+---assignment2.sh run----
